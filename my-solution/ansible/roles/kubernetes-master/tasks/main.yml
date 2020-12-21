@@ -1,0 +1,31 @@
+- name: reset cluster
+  command: kubeadm reset -f
+
+- name: start cluster kubernetes
+  command: kubeadm init
+  register: kubeadm_init_output
+
+- name: create output file
+  copy:
+    content: "{{ kubeadm_init_output.stdout }}"
+    dest: /root/kubeadminit
+
+- name: kubejoin script
+  shell: tail -2 /root/kubeadminit > /root/kubejoin.sh
+
+- name: get kubejoin
+  fetch:
+    dest: ./join
+    src: /root/kubejoin.sh
+
+- name: grouping files
+  shell: |
+        cp join/{{ inventory_hostname }}/root/kubejoin.sh join/
+        rm -fr join/{{ inventory_hostname }}
+  delegate_to: localhost
+  become: no
+
+- name: install pod network
+  command: kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+  environment:
+    KUBECONFIG: /etc/kubernetes/admin.conf

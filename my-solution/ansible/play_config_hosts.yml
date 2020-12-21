@@ -1,0 +1,18 @@
+- name: install kubernetes and docker packages
+  become: yes
+  hosts: tag_name_kubernetes
+  roles:
+    - docker
+    - kubernetes-all
+
+- name: Setup master node
+  become: yes
+  hosts: tag_type_master
+  roles:
+    - kubernetes-master
+
+- name: Setup worker node
+  become: yes
+  hosts: tag_type_worker
+  roles:
+    - kubernetes-worker

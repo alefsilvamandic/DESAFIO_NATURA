@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-python-app-mem
+spec:
+  selector:
+    matchLabels:
+      run: my-python-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: my-python-app
+    spec:
+      containers:
+      - name: my-python-app
+        image: k8s.gcr.io/hpa-example
+        ports:
+        - containerPort: 19000
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-python-app-mem
+  labels:
+    run: my-python-app
+spec:
+  ports:
+  - port: 5002
+  selector:
+    run: my-python-app

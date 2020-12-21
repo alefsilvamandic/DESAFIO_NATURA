@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-python-app-cpu
+spec:
+  selector:
+    matchLabels:
+      run: my-python-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: my-python-app
+    spec:
+      containers:
+      - name: my-python-app
+        image: alef123vinicius/python-app:v1
+        ports:
+        - containerPort: 19000
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-python-app-cpu
+  labels:
+    run: my-python-app
+spec:
+  ports:
+  - port: 5001
+  selector:
+    run: my-python-app

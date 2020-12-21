@@ -1,0 +1,10 @@
+- name: copy join to nodes
+  copy:
+    dest: /tmp/kubejoin.sh
+    src: ./join/kubejoin.sh
+    mode: '0700'
+
+- name: run command on remote
+  shell: /tmp/kubejoin.sh
+  sudo: true
+  sudo_user: root
