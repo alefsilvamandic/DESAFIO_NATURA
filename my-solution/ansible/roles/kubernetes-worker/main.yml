@@ -1,7 +1,0 @@
-- name: copy join to nodes
-  fetch:
-    src: /home/alef/DESAFIO_NATURA/my-solution/ansible/join/kubejoin.sh
-    dest: /tmp/kubejoin.sh
-
-- name: run command on remote
-  shell: /tmp/kubejoin.sh
