@@ -1,10 +1,7 @@
 - name: copy join to nodes
-  copy:
+  fetch:
+    src: /home/alef/DESAFIO_NATURA/my-solution/ansible/join/kubejoin.sh
     dest: /tmp/kubejoin.sh
-    src: ./join/kubejoin.sh
-    mode: '0700'
 
 - name: run command on remote
   shell: /tmp/kubejoin.sh
-  sudo: true
-  sudo_user: root

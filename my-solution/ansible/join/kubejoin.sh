@@ -1,2 +1,2 @@
-kubeadm join 172.31.4.239:6443 --token ev2oam.a466z4bekuawsc1x \
-    --discovery-token-ca-cert-hash sha256:643e0194e20d1f673d85f231b77ee31b36a8a87af1d868f253fb31ec2151ddc6 
+kubeadm join 172.31.5.7:6443 --token uwyyhx.407xv3v0qyl1q1gj \
+    --discovery-token-ca-cert-hash sha256:57cef49adfd6e196a00e891ce3650544ddb6a005148ee5aff81fdb928284ff8a 

@@ -6,10 +6,11 @@ Ter o cluster kubernetes instalado, kubectl, kubeadm e todos os requisitos para 
 
 Para testar a imagem do Dockerfile no docker crie a imagem e execute localmente.
 
-Build image if not exists
+Build image if not exists. Utilize seu user ou uma conta padrão para criar o build.
 
 ```
 docker build -t alef123vinicius/python-app:v1 .
+
 ```
 
 ## No kubernetes
@@ -27,6 +28,4 @@ Para ativar o Horizontal Auto Scaling execute:
 kubectl apply -f my-python-app-hpa-cpu.yaml
 
 ```
-
-Dessa forma um replicaset será criado com a métrica em porcentagem conforme a quantidade de CPU utilizada, aumentando ou diminuindo a aplicação
 

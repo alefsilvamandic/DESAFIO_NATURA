@@ -67,7 +67,7 @@ resource "aws_instance" "kubernetes-worker" {
   instance_type = "t3.medium"
   key_name      = "${aws_key_pair.kubernetes-key.key_name}"
   security_groups = ["${aws_security_group.kubernetes-sg.name}"]
-  count         = 1
+  count         = 3
   tags = {
     name = "kubernetes"
     type = "worker"
