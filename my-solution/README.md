@@ -39,3 +39,56 @@ Terceiro realizar os deploys e ajustar os hpa para escalonamento automático.
 ## application 
 
 https://docs.aws.amazon.com/code-samples/latest/catalog/python-s3-s3_basics-bucket_wrapper.py.html
+
+# Resolucao
+
+## Terraform
+
+```
+$ cd terraform
+```
+
+```
+$ terraform init
+```
+
+```
+$ terraform plan
+```
+
+```
+$ terraform apply
+```
+
+para destruir as instâncias
+
+```
+$ terraform destroy
+```
+
+## Ansible para instalar o kubernetes
+
+Pré-requisitos:
+
+ - python:3.x
+
+ - pip install boto3
+
+Após instalar o python e a biblioteca no host local entre no diretório do ansible e execute 
+
+```
+$ cd ansible
+$ export AWS_ACCESS_KEY_ID='YOUR_AWS_API_KEY'
+$ export AWS_SECRET_ACCESS_KEY='YOUR_AWS_API_SECRET_KEY'
+```
+
+```
+$ ansible-playbook -u ubuntu -i ec2.py play_config_hosts.yml
+```
+
+## Jenkins
+
+Após a instalação do cluster, faça o deploy do jenkins, configure o jenkins para ter acesso ao kubernetes e em seguida crie o pipeline para realizar os deploys das demais aplicações
+
+## Aplicacoes
+
