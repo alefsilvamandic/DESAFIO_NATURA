@@ -1,0 +1,5 @@
+- name: fisrt jenkins deploy
+  become: yes
+  hosts: tag_type_master
+  roles:
+    - jenkins

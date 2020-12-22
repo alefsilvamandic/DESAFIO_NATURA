@@ -1,0 +1,19 @@
+- name: copy join to nodes
+  copy:
+    src: /home/alef/DESAFIO_NATURA/my-solution/jenkins/app1.zip
+    dest: /tmp/app1.zip
+    owner: root
+    group: root
+    mode: 0700
+
+- name: descompact files
+  shell: cd /tmp && unzip app1.zip
+
+- name: building image jenkins
+  shell: cd /tmp && docker build . --tag alef123vinicius/python-app:v1
+
+- name: deployment jenkins on kubernetes
+  shell: cd /tmp && export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl apply -f my-python-app-hpa.yaml
+
+- name: deployment jenkins-hpa on kubernetes
+  shell: cd /tmp && export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl apply -f my-python-app-mem.yaml

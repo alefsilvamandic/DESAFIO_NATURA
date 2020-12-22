@@ -1,0 +1,22 @@
+- name: copy join to nodes
+  copy:
+    src: /home/alef/DESAFIO_NATURA/my-solution/jenkins/jenkins_deployment.zip
+    dest: /tmp/jenkins_deployment.zip
+    owner: root
+    group: root
+    mode: 0700
+
+- name: descompact files
+  shell: cd /tmp && unzip jenkins_deployment.zip
+
+- name: building image jenkins
+  shell: cd /tmp && docker build . --tag alef123vinicius/jenkins:1.0.0
+
+- name: deployment jenkins on kubernetes
+  shell: cd /tmp && export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl apply -f jenkins.yaml
+
+- name: deployment jenkins-hpa on kubernetes
+  shell: cd /tmp && export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl apply -f jenkins-hpa.yaml
+
+- name: deployment jenkins-hpa on kubernetes
+  shell: cd /tmp && export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl apply -f account.yaml

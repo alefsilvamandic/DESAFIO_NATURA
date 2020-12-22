@@ -1,6 +1,3 @@
-- name: list directories
-  command: ls -la /tmp
-
 - name: Copy file with owner and permissions
   copy:
     src: /home/alef/DESAFIO_NATURA/my-solution/ansible/join/kubejoin.sh
@@ -11,6 +8,3 @@
 
 - name: run command on remote
   shell: /tmp/kubejoin.sh
-
-- name: list directories
-  command: ls -la /tmp
